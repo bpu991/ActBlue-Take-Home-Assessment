@@ -1,14 +1,21 @@
-function BandForm({ band }) {
+import { Box } from "@mui/material";
+
+const BandForm = ({ band }) => {
   return (
-    <div>
+    <Box 
+      bgcolor={"palegreen"} 
+      width="60%" 
+      height="400px"
+      padding={4}
+    >
       <h1>{band.name}</h1>
       {band.ticketTypes.map((ticket) => (
         <p>
           {ticket.name} - {ticket.description}
         </p>
       ))}
-    </div>
+    </Box>
   );
-}
+};
 
 export default BandForm;
