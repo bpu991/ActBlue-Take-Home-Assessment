@@ -1,31 +1,35 @@
-import { Box } from '@mui/material';
-import { theme } from '..';
+import { Box } from "@mui/material";
+import { theme } from "..";
 
-const BandBiography = () => {
+const BandBiography = ({ artistName, image, description}) => {
 
-    return (
-        <Box bgcolor={"dodgerblue"}
+  return (
+    <Box
+    maxWidth="40%"
+    sx={{
+      [theme.breakpoints.down("md")]: {
+        maxWidth: "100%",
+        padding: 4,
+      },
+    }}
+    >
+      <Box
+        component="img"
         sx={{
-        [theme.breakpoints.down("sm")]: {
-          maxWidth: "100%",
-          padding: 4,
+          width: '100%',
+          maxWidth: '100%',
+          [theme.breakpoints.down("md")]: {
+            display: "block", 
+            margin: "0 auto",
         },
-      }}
-        >
-            <Box bgcolor={"red"} width="100%" height="200px" display="flex" justifyContent="center" alignItems="center">
-                This is an image
-            </Box>
-            <Box padding={2}>
-                <div>
-                    <b>Come see the world sensation BTESS! ONE NIGHT ONLY!!!</b>
-                    <p>You'll dance.</p>
-                    <p>You'll sing.</p>
-                    <p>You'll cry.</p>
-                    <p>You'll feel all the feels.</p>
-                </div>
-            </Box>
-        </Box>
-    )
+        }}
+        alt={`An image of ${artistName}`}
+        src={image}
+      />
+
+      <Box padding={2} dangerouslySetInnerHTML={{ __html: description }} />
+    </Box>
+  );
 };
 
 export default BandBiography;

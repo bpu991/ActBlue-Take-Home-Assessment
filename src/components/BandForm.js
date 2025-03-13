@@ -60,7 +60,7 @@ const BandForm = ({ ticketTypes }) => {
       bgcolor="#f6faff"
       borderRadius={2}
       sx={{
-        [theme.breakpoints.down("sm")]: {
+        [theme.breakpoints.down("md")]: {
           maxWidth: "100%",
           padding: 4,
         },

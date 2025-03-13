@@ -13,12 +13,17 @@ const Ticket = ({ ticketName, ticketType, description, cost, register }) => {
       paddingTop={2}
       paddingBottom={2}
       sx={{
-        [theme.breakpoints.down("sm")]: {
+        [theme.breakpoints.down("md")]: {
           flexDirection: "column",
+          alignItems: 'flex-start'
         },
       }}
     >
-      <Box display="flex" flexDirection="column" gap={1}>
+      <Box 
+        display="flex" 
+        flexDirection="column" 
+        gap={1}
+    >
         <Typography variant="h3">{ticketName}</Typography>
         <Typography variant="body2">{description}</Typography>
         <Typography>${formattedCost.toFixed(2)}</Typography>
@@ -36,7 +41,7 @@ const Ticket = ({ ticketName, ticketType, description, cost, register }) => {
         sx={{
           minWidth: 70,
           maxWidth: 90,
-          [theme.breakpoints.down("sm")]: {
+          [theme.breakpoints.down("md")]: {
             alignSelf: "flex-end",
           },
         }}

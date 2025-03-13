@@ -1,10 +1,9 @@
 import { Box, Typography } from "@mui/material";
 
-const EventInformation = () => {
-
+const EventInformation = ({artistName, date, location}) => {
+    
     return (
         <Box 
-            width="100%" 
             height="125px" 
             bgcolor="papayawhip" 
             display="flex" 
@@ -14,13 +13,13 @@ const EventInformation = () => {
             marginBottom={4}
         >
             <Typography variant="h1">
-                Band Name
+                {artistName}
             </Typography>
             <Typography variant="subtitle1">
-                Date
+                {date}
             </Typography>
             <Typography variant="subtitle1">
-                Location
+                {location}
             </Typography>
         </Box>
     )
