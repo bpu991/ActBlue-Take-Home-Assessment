@@ -2,7 +2,9 @@ import { Box, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Ticket from "./Ticket";
 import ContactDetails from "./ContactDetails";
-import PaymentDetails from './PaymentDetails';
+import PaymentDetails from "./PaymentDetails";
+import { theme } from "..";
+
 const BandForm = ({ band }) => {
   const {
     register,
@@ -11,7 +13,16 @@ const BandForm = ({ band }) => {
   } = useForm();
 
   return (
-    <Box bgcolor={"palegreen"} width="60%" padding={4}>
+    <Box
+      bgcolor={"palegreen"}
+      padding={4}
+      sx={{
+        [theme.breakpoints.down("sm")]: {
+          maxWidth: "100%",
+          padding: 4,
+        },
+      }}
+    >
       <form>
         <Box display="flex" flexDirection="column" gap={2}>
           <Ticket

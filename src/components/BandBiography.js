@@ -1,9 +1,17 @@
 import { Box } from '@mui/material';
+import { theme } from '..';
 
 const BandBiography = () => {
 
     return (
-        <Box bgcolor={"dodgerblue"} width="40%" height="400px">
+        <Box bgcolor={"dodgerblue"}
+        sx={{
+        [theme.breakpoints.down("sm")]: {
+          maxWidth: "100%",
+          padding: 4,
+        },
+      }}
+        >
             <Box bgcolor={"red"} width="100%" height="200px" display="flex" justifyContent="center" alignItems="center">
                 This is an image
             </Box>
