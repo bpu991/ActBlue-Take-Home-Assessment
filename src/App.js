@@ -29,7 +29,7 @@ function App() {
         }}
       >
         <BandBiography />
-        <BandForm band={bands[0]} />
+        <BandForm ticketTypes={bands[1].ticketTypes} />
       </Box>
     </Container>
   );

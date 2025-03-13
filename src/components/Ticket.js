@@ -1,7 +1,9 @@
 import { Box, Typography, TextField } from "@mui/material";
 import { theme } from "../index";
 
-const Ticket = ({ ticketType, description, cost }) => {
+const Ticket = ({ ticketName, ticketType, description, cost, register }) => {
+
+    const formattedCost = cost / 100
   return (
     <Box
       display="flex"
@@ -17,9 +19,9 @@ const Ticket = ({ ticketType, description, cost }) => {
       }}
     >
       <Box display="flex" flexDirection="column" gap={1}>
-        <Typography variant="h3">{ticketType}</Typography>
+        <Typography variant="h3">{ticketName}</Typography>
         <Typography variant="body2">{description}</Typography>
-        <Typography>$cost</Typography>
+        <Typography>${formattedCost.toFixed(2)}</Typography>
       </Box>
       <TextField
         id="outlined-number"
@@ -38,6 +40,7 @@ const Ticket = ({ ticketType, description, cost }) => {
             alignSelf: "flex-end",
           },
         }}
+        {...register(`tickets.${ticketType}`)}
       />
     </Box>
   );

@@ -16,7 +16,7 @@ export const theme = createTheme({
       fontSize: "1.7rem"
     },
     h3: {
-      fontSize: "1.5rem",
+      fontSize: "1.4rem",
       fontWeight: 400,
     },
     breakpoints: {
