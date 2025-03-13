@@ -8,8 +8,8 @@ import {
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 
 const PaymentDetails = ({ register, errors }) => {
+  // formats the expiration date from 0228 to 02/28
   const handleInputChange = (e) => {
-    // formats the expiration date from 0228 to 02/28
     let value = e.target.value.replace(/\D/g, "");
     if (value.length > 2) {
       value = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
@@ -45,7 +45,7 @@ const PaymentDetails = ({ register, errors }) => {
         {...register("creditCardNumber", {
           required: "Credit Card Number is required",
           pattern: {
-            value: /^[0-9]{16}$/,
+            value: /^[0-9]{16}$/, // Not a regex expert: makes sure the string is 16 characters and only numbers
             message: "Invalid credit card number",
           },
         })}
@@ -88,7 +88,7 @@ const PaymentDetails = ({ register, errors }) => {
           {...register("cvv", {
             required: "CVV is required",
             pattern: {
-              value: /^[0-9]{3}$/,
+              value: /^[0-9]{3}$/, // Not a regex expert: makes sure the string is 3 characters and only numbers
               message: "Invalid CVV",
             },
           })}

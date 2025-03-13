@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Box, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Ticket from "./Ticket";
@@ -10,13 +11,17 @@ const BandForm = ({ ticketTypes }) => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
     defaultValues: {
-      tickets: ticketTypes.reduce((acc, ticket) => {
-        acc[ticket.type] = 0;
-        return acc;
+      // creates a new object from the ticketTypes prop that keeps track of how many of each type of ticket
+      // is being purchased
+      // ex) {general: 0, vip: 2, meet-and-greet: 0}
+      tickets: ticketTypes.reduce((ticketQuantities, ticket) => {
+        ticketQuantities[ticket.type] = 0;
+        return ticketQuantities;
       }, {}),
       firstName: "",
       lastName: "",
@@ -24,17 +29,23 @@ const BandForm = ({ ticketTypes }) => {
       creditCardNumber: "",
       expirationDate: "",
       cvv: "",
+      totalCost: 0,
     },
   });
 
   const ticketsAddedToCart = watch("tickets");
 
-  const totalCost = ticketTypes.reduce((total, ticket) => {
+  const calculateTotalCost = ticketTypes.reduce((total, ticket) => {
     const quantity = ticketsAddedToCart?.[ticket.type] || 0;
     return total + quantity * (ticket.cost / 100);
   }, 0);
 
+  useEffect(() => {
+    setValue("totalCost", calculateTotalCost);
+  }, [ticketsAddedToCart, setValue, calculateTotalCost]);
+
   const hasSelectedTickets = () => {
+    // checks to see if at least 1 ticket has been selected
     return Object.values(ticketsAddedToCart).some((quantity) => quantity > 0);
   }
 
@@ -60,8 +71,9 @@ const BandForm = ({ ticketTypes }) => {
           <Typography variant='h2' fontWeight={700}>
             Select Tickets
           </Typography>
-          {ticketTypes.map((ticket) => (
+          {ticketTypes.map((ticket, index) => (
             <Ticket
+              key={`${ticket.type}-${index}`}
               ticketType={ticket.type}
               ticketName={ticket.name}
               description={ticket.description}
@@ -71,7 +83,7 @@ const BandForm = ({ ticketTypes }) => {
           ))}
           <Box display="flex" justifyContent="space-between">
             <Typography variant="h2">TOTAL</Typography>
-            <Typography variant="h2">${totalCost.toFixed(2)}</Typography>
+            <Typography variant="h2">${calculateTotalCost.toFixed(2)}</Typography>
           </Box>
           <ContactDetails register={register} errors={errors} />
           <PaymentDetails register={register} errors={errors} />
