@@ -1,7 +1,14 @@
+import React from "react";
 import { Box, TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldErrors } from "react-hook-form";
+import { FormValues } from './BandForm.tsx';
 
-const ContactDetails = ({ control, errors }) => {
+interface ContactDetailsProps {
+  control: Control<FormValues>;
+  errors: FieldErrors<FormValues>
+};
+
+const ContactDetails = ({ control, errors }: ContactDetailsProps) => {
   return (
     <Box display="flex" flexDirection="column" gap={2}>
       <Box display="flex" gap={1}>

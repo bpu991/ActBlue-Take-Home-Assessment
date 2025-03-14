@@ -1,8 +1,15 @@
+import React from "react";
 import { Box, Typography, TextField, InputAdornment } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
+import { FormValues } from "./BandForm";
 
-const PaymentDetails = ({ control, errors }) => {
+interface PaymentDetailsProps {
+  control: Control<FormValues>;
+  errors: FieldErrors<FormValues>
+};
+
+const PaymentDetails = ({ control, errors }: PaymentDetailsProps) => {
   // formats the expiration date from 0228 to 02/28
   const handleInputChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
@@ -22,7 +29,7 @@ const PaymentDetails = ({ control, errors }) => {
         rules={{
           required: "Credit Card Number is required",
           pattern: {
-            value: /^[0-9]{16}$/, // Warning: not a regex expert - verifies the string is 16 characters and only numbers
+            value: /^[0-9]{16}$/, // note: not a regex expert - verifies the string is 16 characters and only numbers
             message: "Invalid credit card number",
           },
         }}
@@ -91,7 +98,7 @@ const PaymentDetails = ({ control, errors }) => {
           rules={{
             required: "CVV is required",
             pattern: {
-              value: /^[0-9]{3}$/, // Warning: not a regex expert - verifies the string is 3 characters and only numbers
+              value: /^[0-9]{3}$/, // note: not a regex expert - verifies the string is 3 characters and only numbers
               message: "Invalid CVV",
             },
           }}

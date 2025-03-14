@@ -1,21 +1,40 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { Box, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import Ticket from "./Ticket";
-import ContactDetails from "./ContactDetails";
-import PaymentDetails from "./PaymentDetails";
+import Ticket from "./Ticket.tsx";
+import ContactDetails from "./ContactDetails.tsx";
+import PaymentDetails from "./PaymentDetails.tsx";
 import theme from "../theme";
+import { Band } from './BandSelection';
 
-const BandForm = ({ ticketTypes, selectedBand }) => {
+export interface FormValues {
+  tickets: Record<string, number>;
+  firstName: string;
+  lastName: string;
+  address: string;
+  creditCardNumber: string;
+  expirationDate: string;
+  cvv: string;
+  totalCost: number;
+}
+
+interface BandFormProps {
+  selectedBand: Band
+}
+
+const BandForm = ({ selectedBand }: BandFormProps) => {
+
+  const { ticketTypes} = selectedBand;
+
   const {
     control,
-    formState,
     handleSubmit,
     watch,
     setValue,
     reset,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<FormValues>({
     mode: "onBlur",
     defaultValues: {
       // creates a new object from the ticketTypes prop that keeps 
@@ -56,7 +75,7 @@ const BandForm = ({ ticketTypes, selectedBand }) => {
     reset();
   }, [reset, selectedBand]);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormValues) => {
     console.log("Form submitted with data:", data);
     alert('Form Submitted Successfully')
     reset();

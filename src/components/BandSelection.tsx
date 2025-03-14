@@ -1,20 +1,36 @@
 import React, { useState } from "react";
 import { Container, Select, MenuItem, InputLabel, Box } from "@mui/material";
-import EventInformation from "./EventInformation";
-import BandBiography from "./BandBiography";
-import BandForm from "./BandForm";
+import EventInformation from "./EventInformation.tsx";
+import BandBiography from "./BandBiography.tsx";
+import BandForm from "./BandForm.tsx";
 import theme from "../theme";
 
-export default function BandSelection({ bands }) {
-  const [selectedBand, setSelectedBand] = useState(bands[0]);
+interface TicketType {
+  type: string;
+  name: string;
+  description: string;
+  cost: number;
+}
+
+export interface Band {
+  name: string;
+  id: string;
+  date: number;
+  location: string;
+  description_blurb: string;
+  imgUrl: string;
+  ticketTypes: TicketType[];
+}
+
+export default function BandSelection({ bands }: {bands: Band[]}) {
+  const [selectedBand, setSelectedBand] = useState<Band>(bands[0]);
 
   const { 
     date, 
     description_blurb, 
     imgUrl, 
     location,
-    name, 
-    ticketTypes 
+    name,  
   } = selectedBand;
 
   return (
@@ -26,7 +42,9 @@ export default function BandSelection({ bands }) {
         value={selectedBand.name}
         onChange={(e) => {
           const currentBand = bands.find((band) => band.name === e.target.value);
-          setSelectedBand(currentBand);
+          if (currentBand) {
+            setSelectedBand(currentBand);
+          }
         }}
         fullWidth
         sx={{ marginBottom: 2 }}
@@ -50,7 +68,7 @@ export default function BandSelection({ bands }) {
         }}
       >
         <BandBiography artistName={name} image={imgUrl} description={description_blurb} />
-        <BandForm ticketTypes={ticketTypes} selectedBand={selectedBand} />
+        <BandForm selectedBand={selectedBand} />
       </Box>
     </Container>
   );
