@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { theme } from "..";
+import theme from "../theme";
 
 const BandBiography = ({ artistName, image, description}) => {
 
@@ -15,9 +15,9 @@ const BandBiography = ({ artistName, image, description}) => {
     >
       <Box
         component="img"
+        width="100%"
+        maxWidth="100%"
         sx={{
-          width: '100%',
-          maxWidth: '100%',
           [theme.breakpoints.down("md")]: {
             display: "block", 
             margin: "0 auto",
