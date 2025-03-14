@@ -1,8 +1,15 @@
+import React from "react";
 import { Box, Typography, TextField, InputAdornment } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
+import { FormValues } from "./BandForm";
 
-const PaymentDetails = ({ control, errors }) => {
+interface PaymentDetailsProps {
+  control: Control<FormValues>;
+  errors: FieldErrors<FormValues>
+};
+
+const PaymentDetails = ({ control, errors }: PaymentDetailsProps) => {
   // formats the expiration date from 0228 to 02/28
   const handleInputChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");

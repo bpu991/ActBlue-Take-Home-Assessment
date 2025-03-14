@@ -1,10 +1,18 @@
+import React from "react";
 import { Box, Typography } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import theme from "../theme";
-const EventInformation = ({ artistName, date, location }) => {
+
+interface EventInformationProps {
+  artistName: string;
+  date: number;
+  location: string;
+}
+
+const EventInformation = ({ artistName, date, location }: EventInformationProps) => {
     
-  const formatDate = (timestamp) => {
+  const formatDate = (timestamp: number) => {
     return new Intl.DateTimeFormat("en-US", {
       weekday: "long",
       month: "long",

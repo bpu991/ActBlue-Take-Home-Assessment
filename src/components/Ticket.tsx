@@ -1,8 +1,18 @@
+import React from "react";
 import { Box, Typography, TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
+import { FormValues } from './BandForm.tsx';
 import theme from "../theme";
 
-const Ticket = ({ ticketName, ticketType, description, cost, control }) => {
+interface TicketProps {
+  ticketName: string;
+  ticketType: string;
+  description: string;
+  cost: number;
+  control: Control<FormValues>;
+};
+
+const Ticket = ({ ticketName, ticketType, description, cost, control }: TicketProps) => {
   const formattedCost = cost / 100;
   return (
     <Box

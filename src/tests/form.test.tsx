@@ -1,22 +1,32 @@
+import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import BandForm from "../components/BandForm";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
+import { Band } from "../components/BandSelection"
 
-const mockTicketTypes = [
-  {
-    type: "regular",
-    name: "Regular Ticket",
-    description: "Standard access",
-    cost: 3000,
-  },
-  { type: "vip", name: "VIP Ticket", description: "VIP access", cost: 5000 },
-];
+const mockBand: Band = {
+  name: "mock band",
+  id: "mockband",
+  date: 1686675030000,
+  location: "location",
+  description_blurb: "description",
+  imgUrl: "image.png",
+  ticketTypes: [
+    {
+      type: "regular",
+      name: "Regular Ticket",
+      description: "Standard access",
+      cost: 3000,
+    },
+    { type: "vip", name: "VIP Ticket", description: "VIP access", cost: 5000 },
+  ]
+}
 
 const setup = () => {
   render(
     <ThemeProvider theme={theme}>
-      <BandForm ticketTypes={mockTicketTypes} />
+      <BandForm selectedBand={mockBand} />
     </ThemeProvider>
   );
 };

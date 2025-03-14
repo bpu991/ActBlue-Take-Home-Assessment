@@ -1,7 +1,14 @@
+import React from "react";
 import { Box } from "@mui/material";
 import theme from "../theme";
 
-const BandBiography = ({ artistName, image, description}) => {
+interface BandBiographyProps {
+  artistName: string;
+  image: string;
+  description: string;
+};
+
+const BandBiography = ({ artistName, image, description}: BandBiographyProps) => {
 
   return (
     <Box
@@ -16,7 +23,6 @@ const BandBiography = ({ artistName, image, description}) => {
       <Box
         component="img"
         width="100%"
-        maxWidth="100%"
         sx={{
           [theme.breakpoints.down("md")]: {
             display: "block", 
