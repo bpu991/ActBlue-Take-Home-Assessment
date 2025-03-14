@@ -62,7 +62,6 @@ const BandForm = ({ ticketTypes, selectedBand }) => {
     reset();
   };
 
-  console.log("--------------",formState, hasSelectedTickets());
   return (
     <Box
       padding={4}
