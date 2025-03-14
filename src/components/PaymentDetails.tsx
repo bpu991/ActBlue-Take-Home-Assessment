@@ -29,7 +29,7 @@ const PaymentDetails = ({ control, errors }: PaymentDetailsProps) => {
         rules={{
           required: "Credit Card Number is required",
           pattern: {
-            value: /^[0-9]{16}$/, // Warning: not a regex expert - verifies the string is 16 characters and only numbers
+            value: /^[0-9]{16}$/, // note: not a regex expert - verifies the string is 16 characters and only numbers
             message: "Invalid credit card number",
           },
         }}
@@ -98,7 +98,7 @@ const PaymentDetails = ({ control, errors }: PaymentDetailsProps) => {
           rules={{
             required: "CVV is required",
             pattern: {
-              value: /^[0-9]{3}$/, // Warning: not a regex expert - verifies the string is 3 characters and only numbers
+              value: /^[0-9]{3}$/, // note: not a regex expert - verifies the string is 3 characters and only numbers
               message: "Invalid CVV",
             },
           }}
