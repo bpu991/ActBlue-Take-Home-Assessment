@@ -4,20 +4,22 @@ import { useForm } from "react-hook-form";
 import Ticket from "./Ticket";
 import ContactDetails from "./ContactDetails";
 import PaymentDetails from "./PaymentDetails";
-import { theme } from "..";
+import theme from "../theme";
 
-const BandForm = ({ ticketTypes }) => {
+const BandForm = ({ ticketTypes, selectedBand }) => {
   const {
-    register,
+    control,
+    formState,
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
     defaultValues: {
-      // creates a new object from the ticketTypes prop that keeps track of how many of each type of ticket
-      // is being purchased
+      // creates a new object from the ticketTypes prop that keeps 
+      // track of how many of each type of ticket is being purchased
       // ex) {general: 0, vip: 2, meet-and-greet: 0}
       tickets: ticketTypes.reduce((ticketQuantities, ticket) => {
         ticketQuantities[ticket.type] = 0;
@@ -40,20 +42,27 @@ const BandForm = ({ ticketTypes }) => {
     return total + quantity * (ticket.cost / 100);
   }, 0);
 
-  useEffect(() => {
-    setValue("totalCost", calculateTotalCost);
-  }, [ticketsAddedToCart, setValue, calculateTotalCost]);
-
   const hasSelectedTickets = () => {
     // checks to see if at least 1 ticket has been selected
     return Object.values(ticketsAddedToCart).some((quantity) => quantity > 0);
   }
 
+  useEffect(() => {
+    setValue("totalCost", calculateTotalCost);
+  }, [ticketsAddedToCart, setValue, calculateTotalCost]);
+  
+  useEffect(() => {
+    // resets the form when a new artist is selected
+    reset();
+  }, [reset, selectedBand]);
+
   const onSubmit = (data) => {
     console.log("Form submitted with data:", data);
     alert('Form Submitted Successfully')
+    reset();
   };
 
+  console.log("--------------",formState, hasSelectedTickets());
   return (
     <Box
       padding={4}
@@ -78,16 +87,17 @@ const BandForm = ({ ticketTypes }) => {
               ticketName={ticket.name}
               description={ticket.description}
               cost={ticket.cost}
-              register={register}
+              control={control}
             />
           ))}
-          <Box display="flex" justifyContent="space-between">
+          <Box data-testid="total-container" display="flex" justifyContent="space-between">
             <Typography variant="h2">TOTAL</Typography>
             <Typography variant="h2">${calculateTotalCost.toFixed(2)}</Typography>
           </Box>
-          <ContactDetails register={register} errors={errors} />
-          <PaymentDetails register={register} errors={errors} />
+          <ContactDetails control={control} errors={errors} />
+          <PaymentDetails control={control} errors={errors} />
           <Button
+            data-testid="submit-button"
             type="submit"
             fullWidth
             variant="contained"

@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { theme } from "..";
+import theme from "../theme";
 const EventInformation = ({ artistName, date, location }) => {
     
   const formatDate = (timestamp) => {
@@ -41,7 +41,7 @@ const EventInformation = ({ artistName, date, location }) => {
         }}
       >
         <CalendarMonthIcon />
-        <Typography variant="subtitle1">{formattedDate}</Typography>
+        <Typography variant="h2">{formattedDate}</Typography>
       </Box>
 
       <Box
@@ -57,7 +57,7 @@ const EventInformation = ({ artistName, date, location }) => {
         }}
       >
         <LocationOnIcon />
-        <Typography variant="subtitle1">{location}</Typography>
+        <Typography variant="h2">{location}</Typography>
       </Box>
     </Box>
   );
