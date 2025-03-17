@@ -11,4 +11,5 @@
 note: If it errors out, try refreshing the browser
 
 
-
+## `npm test`
+Runs tests
