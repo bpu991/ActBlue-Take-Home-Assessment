@@ -5,7 +5,7 @@ import BandBiography from "./BandBiography.tsx";
 import BandForm from "./BandForm.tsx";
 import theme from "../theme";
 
-interface TicketType {
+export interface TicketType {
   type: string;
   name: string;
   description: string;
@@ -31,6 +31,7 @@ export default function BandSelection({ bands }: {bands: Band[]}) {
     imgUrl, 
     location,
     name,  
+    ticketTypes
   } = selectedBand;
 
   return (
@@ -68,7 +69,7 @@ export default function BandSelection({ bands }: {bands: Band[]}) {
         }}
       >
         <BandBiography artistName={name} image={imgUrl} description={description_blurb} />
-        <BandForm selectedBand={selectedBand} />
+        <BandForm artistName={name} ticketTypes={ticketTypes}/>
       </Box>
     </Container>
   );

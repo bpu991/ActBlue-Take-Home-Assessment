@@ -3,7 +3,8 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import BandForm from "../components/BandForm";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
-import { Band } from "../components/BandSelection"
+import { Band } from "../components/BandSelection";
+import "@testing-library/jest-dom";
 
 const mockBand: Band = {
   name: "mock band",
@@ -20,13 +21,13 @@ const mockBand: Band = {
       cost: 3000,
     },
     { type: "vip", name: "VIP Ticket", description: "VIP access", cost: 5000 },
-  ]
-}
+  ],
+};
 
 const setup = () => {
   render(
     <ThemeProvider theme={theme}>
-      <BandForm selectedBand={mockBand} />
+      <BandForm artistName={mockBand.name} ticketTypes={mockBand.ticketTypes} />
     </ThemeProvider>
   );
 };
@@ -76,9 +77,9 @@ describe("Band Form", () => {
     expect(ticketInput).toHaveValue(0);
 
     await waitFor(() => {
-        const submitButton = screen.getByRole("button", { name: /Get Tickets/i });
-        expect(submitButton).toBeDisabled();
-      });
+      const submitButton = screen.getByRole("button", { name: /Get Tickets/i });
+      expect(submitButton).toBeDisabled();
+    });
   });
 
   it("enables the submit button when all the fields are valid", async () => {

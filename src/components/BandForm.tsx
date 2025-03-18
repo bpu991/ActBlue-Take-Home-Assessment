@@ -6,7 +6,7 @@ import Ticket from "./Ticket.tsx";
 import ContactDetails from "./ContactDetails.tsx";
 import PaymentDetails from "./PaymentDetails.tsx";
 import theme from "../theme";
-import { Band } from './BandSelection';
+import { TicketType } from './BandSelection';
 
 export interface FormValues {
   tickets: Record<string, number>;
@@ -20,12 +20,11 @@ export interface FormValues {
 }
 
 interface BandFormProps {
-  selectedBand: Band
+  artistName: string;
+  ticketTypes: TicketType[];
 }
 
-const BandForm = ({ selectedBand }: BandFormProps) => {
-
-  const { ticketTypes} = selectedBand;
+const BandForm = ({ artistName, ticketTypes }: BandFormProps) => {
 
   const {
     control,
@@ -73,7 +72,7 @@ const BandForm = ({ selectedBand }: BandFormProps) => {
   useEffect(() => {
     // resets the form when a new artist is selected
     reset();
-  }, [reset, selectedBand]);
+  }, [reset, artistName]);
 
   const onSubmit = (data: FormValues) => {
     console.log("Form submitted with data:", data);
